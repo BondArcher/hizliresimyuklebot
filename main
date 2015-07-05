@@ -1,0 +1,14 @@
+import requests
+from bs4 import BeautifulSoup
+
+
+kelime=input("Aranacak kelime-->\n")
+url = 'http://hizliresimyukle.com/search/images/?q=' + kelime
+response = requests.get(url, stream=True)
+soup=BeautifulSoup(response.text,"html.parser")
+k=0
+for link in soup.find_all("img"):
+    response2=requests.get(link.get("src"),stream=True)
+    resim=open("C://Users//UserName//Desktop//IndirilecekDosya//resim"+str(k)+".jpg","wb")
+    resim.write(response2.content)
+    k=k+1
