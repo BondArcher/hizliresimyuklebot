@@ -1,14 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
-
-
+k=1
 kelime=input("Aranacak kelime-->\n")
 url = 'http://hizliresimyukle.com/search/images/?q=' + kelime
-response = requests.get(url, stream=True)
-soup=BeautifulSoup(response.text,"html.parser")
-k=0
-for link in soup.find_all("img"):
-    response2=requests.get(link.get("src"),stream=True)
-    resim=open("C://Users//UserName//Desktop//IndirilecekDosya//resim"+str(k)+".jpg","wb")
-    resim.write(response2.content)
-    k=k+1
+while(k%26==1 or k==1):
+    response = requests.get(url, stream=True)
+    soup=BeautifulSoup(response.text,"html.parser")
+    for link in soup.find_all("img"):
+        response2=requests.get(link.get("src"),stream=True)
+        resim=open("C://Users//UserName//Desktop//DirectoryH//"+kelime+str(k)+".jpg","wb")
+        resim.write(response2.content)
+        k=k+1
+    if(k>26):
+        url="http://hizliresimyukle.com/search/images/?q="+kelime+"&page="+str(int(k/25+1))
