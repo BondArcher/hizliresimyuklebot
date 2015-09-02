@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 k=1
 kelime=input("Aranacak kelime-->\n")
 url = 'http://hizliresimyukle.com/search/images/?q=' + kelime
-while(k%26==1 or k==1):
+while(k%26==1):
     response = requests.get(url, stream=True)
     soup=BeautifulSoup(response.text,"html.parser")
     for link in soup.find_all("img"):
